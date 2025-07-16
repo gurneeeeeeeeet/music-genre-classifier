@@ -4,7 +4,6 @@ __pycache__/
 *.so
 *.egg
 *.egg-info/
-*.pyo
 *.pyd
 *.pkl
 *.h5
@@ -51,9 +50,6 @@ desktop.ini
 # --- Env Files (secret keys etc.) ---
 .env
 .env.*
-
-# --- Pip Freeze File (optional if auto-generated) ---
-requirements.txt
 
 # --- Streamlit Caches ---
 .streamlit/
