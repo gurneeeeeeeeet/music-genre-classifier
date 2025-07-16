@@ -1,0 +1,64 @@
+# --- Python ---
+__pycache__/
+*.py[cod]
+*.so
+*.egg
+*.egg-info/
+*.pyo
+*.pyd
+*.pkl
+*.h5
+*.db
+*.sqlite3
+
+# --- Virtual Environment ---
+venv/
+env/
+ENV/
+.venv/
+*.env
+
+# --- Jupyter Notebook Checkpoints ---
+.ipynb_checkpoints/
+
+# --- VS Code ---
+.vscode/
+.history/
+
+# --- System Files ---
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# --- Logs ---
+*.log
+
+# --- Data Files (optional) ---
+/data/
+*.csv
+*.tsv
+*.json
+*.zip
+*.tar.gz
+
+# --- Model Checkpoints (optional) ---
+/models/
+*.pth
+*.pt
+*.joblib
+*.sav
+
+# --- Env Files (secret keys etc.) ---
+.env
+.env.*
+
+# --- Pip Freeze File (optional if auto-generated) ---
+requirements.txt
+
+# --- Streamlit Caches ---
+.streamlit/
+
+# --- Coverage & Testing ---
+htmlcov/
+coverage.xml
+.cache/
