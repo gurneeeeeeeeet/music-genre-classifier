@@ -3,7 +3,7 @@ from sklearn.preprocessing import StandardScaler, LabelEncoder
 
 def load_dataset(path: str) -> pd.DataFrame:
     """
-    Load the dataset from a CSV file.
+    Load the dataset from a CSV file and drop unnamed index columns.
 
     Parameters:
         path (str): File path to the CSV.
@@ -12,6 +12,7 @@ def load_dataset(path: str) -> pd.DataFrame:
         pd.DataFrame: Loaded dataset.
     """
     df = pd.read_csv(path)
+    df = df.loc[:, ~df.columns.str.contains("^Unnamed", case=False)]
     return df
 
 def handle_missing_values(df: pd.DataFrame) -> pd.DataFrame:
@@ -38,8 +39,8 @@ def drop_unnecessary_columns(df: pd.DataFrame) -> pd.DataFrame:
         pd.DataFrame: DataFrame without unnecessary columns.
     """
     columns_to_drop = [
-        'track_id', 'artists', 'album_name', 'track_name',
-        'popularity', 'duration_ms', 'key', 'mode', 'time_signature'
+    'track_id', 'artists', 'album_name', 'track_name',
+    'popularity', 'duration_ms', 'key', 'mode', 'time_signature'
     ]
     return df.copy().drop(columns=columns_to_drop, errors='ignore')
 
@@ -76,6 +77,20 @@ def encode_labels(df: pd.DataFrame) -> tuple[pd.DataFrame, LabelEncoder]:
     encoder = LabelEncoder()
     df['track_genre'] = encoder.fit_transform(df['track_genre'])
     return df, encoder
+
+def encode_explicit(df: pd.DataFrame) -> pd.DataFrame:
+    """
+    Encode the 'explicit' column into binary values.
+
+    Parameters:
+        df (pd.DataFrame): DataFrame containing the 'explicit' column.
+
+    Returns:
+        pd.DataFrame: DataFrame with encoded 'explicit' column.
+    """
+    if 'explicit' in df.columns:
+        df['explicit'] = df['explicit'].astype(str).str.lower().map({'true': 1, 'false': 0}).fillna(0).astype(int)
+    return df
 
 def preprocess(path: str) -> tuple[pd.DataFrame, LabelEncoder, StandardScaler]:
     """
